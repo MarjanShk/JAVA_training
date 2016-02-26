@@ -1,11 +1,10 @@
 apply plugin: 'java'
-apply plugin: 'application'
-mainClassName = "pack.firstProgram.Hello"
 
 repositories{
     mavenCentral()
 }
 
 dependencies{
+    compile 'org.seleniumhq.selenium:selenium-java:2.52.0'
     compile 'org.testng:testng:6.9.10'
 }
