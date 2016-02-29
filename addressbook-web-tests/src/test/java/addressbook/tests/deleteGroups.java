@@ -2,15 +2,15 @@ package addressbook.tests;
 
 import org.testng.annotations.Test;
 
-public class deleteGroups extends TestBase {
+public class DeleteGroups extends TestBase {
 
     @Test
     public void testDeleteGroups() {
-        app.goToGroupPage();
-        app.selectGroups();
-        app.removeSelectedGroups();
-        app.returnToGroupPage();
-        app.logout();
+        app.getNavigationHelper().goToGroupPage();
+        app.getGroupHelper().selectGroups();
+        app.getGroupHelper().removeSelectedGroups();
+        app.getGroupHelper().returnToGroupPage();
+        app.getSessionHelper().logout();
     }
 
 }
