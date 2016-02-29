@@ -1,6 +1,5 @@
 package addressbook.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -14,14 +13,16 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
+    private ContactHelper contactHelper;
 
     public void init() {
         wd = new FirefoxDriver();
-        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.manage().window().maximize();
         sessionHelper = new SessionHelper(wd);
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
+        contactHelper = new ContactHelper(wd);
         wd.get("http://localhost:8081/addressbook/");
         sessionHelper.login("admin", "secret");
     }
@@ -41,5 +42,8 @@ public class ApplicationManager {
     public SessionHelper getSessionHelper() {
         return sessionHelper;
     }
-    
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
+    }
 }

@@ -1,5 +1,6 @@
-package addressbook.tests;
+package addressbook.tests.groups;
 
+import addressbook.tests.TestBase;
 import org.testng.annotations.Test;
 
 public class DeleteGroups extends TestBase {

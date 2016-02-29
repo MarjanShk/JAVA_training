@@ -1,7 +1,6 @@
 package addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
@@ -14,7 +13,7 @@ public class SessionHelper extends HelperBase {
     }
 
     public void logout() {
-        wd.findElement(By.linkText("Вийти")).click();
+        wd.findElement(By.xpath("//a[@onclick='document.logout.submit();']")).click();
     }
 
     public void login(String username, String password) {
