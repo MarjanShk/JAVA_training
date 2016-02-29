@@ -11,7 +11,6 @@ public class DeleteContactTests extends TestBase {
     public void testDeleteFirstContact(){
         app.getContactHelper().selectContact();
         app.getContactHelper().submitContactDeleting();
-        app.getSessionHelper().logout();
     }
 
 }
