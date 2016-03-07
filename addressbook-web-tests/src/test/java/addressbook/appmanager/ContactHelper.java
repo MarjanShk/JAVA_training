@@ -2,6 +2,7 @@ package addressbook.appmanager;
 
 import addressbook.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -27,7 +28,15 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            try {
+                /*проверяет существует ли группа с названием указанным при создании контакта.Если такой не существует
+                select остается не заполненным.
+                */
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            }catch (NoSuchElementException ex){
+                return;
+            }
+
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -54,10 +63,11 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//form[@action='edit.php']/input[@name='update']"));
     }
 
-    public boolean isThereAContact(){
+    public boolean isThereAContact() {
         return isElementPresent(By.xpath("//table[@id='maintable']//input[@name='selected[]']"));
     }
-    public void createContact(ContactData contactData, boolean creation){
+
+    public void createContact(ContactData contactData, boolean creation) {
         initContactCreation();
         fillContactForm(contactData, creation);
         submitContactCreation();
