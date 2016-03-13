@@ -27,5 +27,11 @@ public class NavigationHelper extends HelperBase {
         }
         click(By.linkText("home page"));
     }
+public void goToMainPage(){
+    if(isElementPresent(By.id("maintable"))){
+        return;
+    }
+    click(By.xpath("//a[@href='./']"));
+}
 
 }
