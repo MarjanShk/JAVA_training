@@ -10,13 +10,15 @@ import java.util.List;
 
 public class AddContactTests extends TestBase {
 
-    @Test
+    @Test()
     public void testAddContact() {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        ContactData contact = new ContactData("name222", "middlename2", "secondname2", "0933456789", "example1@gmail.com", "name888");
-        app.getContactHelper().createContact(contact, true);
-        app.getNavigationHelper().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
+        ContactData contact = new ContactData().
+                withName("name1").withMiddlename("mddlename1").withSecondname("secondname1").
+                withHomePhoneNumber("0933456789").withEmail("example1@gmail.com").withGroup("name88");
+        app.contact().create(contact, true);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() + 1);
         before.add(contact);
 

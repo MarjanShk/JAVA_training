@@ -12,7 +12,7 @@ public class NavigationHelper extends HelperBase {
         super(wd);
     }
 
-    public void goToGroupPage() {
+    public void groupPage() {
         if (isElementPresent(By.tagName("h1"))
                 && wd.findElement(By.tagName("h1")).getText().equals("Groups")
                 && isElementPresent(By.name("new"))) {
@@ -21,13 +21,13 @@ public class NavigationHelper extends HelperBase {
         click(By.xpath("//a[@href='group.php']"));
     }
 
-    public void goToHomePage() {
+    public void homePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
         }
         click(By.linkText("home page"));
     }
-public void goToMainPage(){
+public void mainPage(){
     if(isElementPresent(By.id("maintable"))){
         return;
     }

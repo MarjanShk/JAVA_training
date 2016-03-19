@@ -15,21 +15,24 @@ public class ModificationContactTests extends TestBase {
 
     @Test
     public void testModificationContact() {
-        if(! app.getContactHelper().isThereAContact()){
-            app.getContactHelper().createContact(new ContactData("name1", "middlename1", "secondname1", "0933456789", "example1@gmail.com", "name88"), true);
+        if(! app.contact().isThereAContact()){
+            app.contact().create(new ContactData().
+                    withName("name1").withMiddlename("middlename1").withSecondname("secondname1").
+                    withHomePhoneNumber("0933456789").withEmail("example1@gmail.com").withGroup("name88"), true);
         }
-        app.getNavigationHelper().goToHomePage();
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().editContact(before.size()-1);
-        ContactData contact = new ContactData("mod_name1", "mod_middlename1", "mod_secondname1", "000000000", "mod_example1@gmail.com", null);
-        app.getContactHelper().fillContactForm(contact, false);
-        app.getContactHelper().submitContactModification();
-        app.getNavigationHelper().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.goTo().homePage();
+        List<ContactData> before = app.contact().list();
+        ContactData contact = new ContactData().
+                withName("mod_name1").withMiddlename("mod_mddlename1").withSecondname("mod_secondname1").
+                withHomePhoneNumber("0930000000").withEmail("mod_example1@gmail.com");
+        int index = before.size()-1;
+        app.contact().modify(contact, index);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
 
         Assert.assertEquals(before.size(), after.size());
 
-        before.remove(before.size()-1);
+        before.remove(index);
         before.add(contact);
 
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
@@ -38,5 +41,4 @@ public class ModificationContactTests extends TestBase {
 
         Assert.assertEquals(before, after);
     }
-
 }

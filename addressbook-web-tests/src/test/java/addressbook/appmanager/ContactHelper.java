@@ -50,7 +50,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//li[@class='all']/a[@href='edit.php']"));
     }
 
-    public void selectContact(int index) {
+    public void select(int index) {
         wd.findElements(By.xpath("//input[@name='selected[]']")).get(index).click();
     }
 
@@ -60,7 +60,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void editContact(int index) {
+    public void edit(int index) {
         wd.findElements(By.xpath("//a[contains(@href, 'edit.php?id=')]")).get(index).click();
         //click(By.xpath("//a[contains(@href, 'edit.php?id=')]"));
     }
@@ -73,21 +73,31 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.xpath("//table[@id='maintable']//input[@name='selected[]']"));
     }
 
-    public void createContact(ContactData contactData, boolean creation) {
+    public void create(ContactData contactData, boolean creation) {
         initContactCreation();
         fillContactForm(contactData, creation);
         submitContactCreation();
 
     }
+    public void delete(int index) {
+       select(index);
+       submitContactDeleting();
+    }
 
-    public List<ContactData> getContactList() {
+    public void modify(ContactData contact, int index) {
+       edit(index);
+       fillContactForm(contact, false);
+       submitContactModification();
+    }
+
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
         for (WebElement el : elements) {
             String secondName = el.findElement(By.cssSelector("td:nth-of-type(2)")).getText();
             String name = el.findElement(By.cssSelector(" td:nth-of-type(3)")).getText();
             int id = Integer.parseInt(el.findElement(By.cssSelector(" td.center>input")).getAttribute("id"));
-            contacts.add(new ContactData(id, name, null, secondName, null, null, null));
+            contacts.add(new ContactData().withId(id).withName(name).withSecondname(secondName));
         }
         return contacts;
     }

@@ -4,7 +4,6 @@ import addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ public class GroupHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[5]"));
     }
 
-    public void selectGroups(int index) {
+    public void select(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
@@ -52,13 +51,25 @@ public class GroupHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void createGroup(GroupData group) {
+    public void create(GroupData group) {
         initNewGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
         returnToGroupPage();
     }
 
+    public void modify(int index, GroupData group) {
+        select(index);
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returnToGroupPage();
+    }
+    public void delete(int index) {
+       select(index);
+       removeSelectedGroups();
+       returnToGroupPage();
+    }
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -67,13 +78,13 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> getGroupList() {
+    public List<GroupData> list() {
         List<GroupData> groups = new ArrayList<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement el : elements) {
             String name = el.getText();
             int id = Integer.parseInt(el.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData(id, name, null, null));
+            groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
     }
