@@ -23,8 +23,9 @@ public class AddContactTests extends TestBase {
                 withHomePhoneNumber("0933456789").withEmail("example1@gmail.com").withGroup("name88");
         app.contact().create(contact, true);
         app.goTo().homePage();
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
+
         assertThat(after, equalTo(before.withAdded(contact)));
 
     }

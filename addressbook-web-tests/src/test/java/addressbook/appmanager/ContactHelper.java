@@ -118,4 +118,8 @@ public class ContactHelper extends HelperBase {
         }
         return new Contacts(contactsCash);
     }
+
+    public int count() {
+        return wd.findElements(By.xpath("//input[@name='selected[]']")).size();
+    }
 }
