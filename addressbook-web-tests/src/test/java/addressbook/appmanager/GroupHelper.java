@@ -1,12 +1,15 @@
 package addressbook.appmanager;
 
 import addressbook.model.GroupData;
+import addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Admin on 26.02.2016.
@@ -43,6 +46,10 @@ public class GroupHelper extends HelperBase {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectById(int id) {
+        wd.findElement(By.cssSelector("input[name='selected[]'][value='" + id + "']")).click();
+    }
+
     public void initGroupModification() {
         click(By.name("edit"));
     }
@@ -58,18 +65,26 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-    public void modify(int index, GroupData group) {
-        select(index);
+    public void modify(GroupData group) {
+        selectById(group.getId());
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
         returnToGroupPage();
     }
+
     public void delete(int index) {
-       select(index);
-       removeSelectedGroups();
-       returnToGroupPage();
+        select(index);
+        removeSelectedGroups();
+        returnToGroupPage();
     }
+
+    public void delete(GroupData group) {
+        selectById(group.getId());
+        removeSelectedGroups();
+        returnToGroupPage();
+    }
+
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -78,8 +93,9 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> list() {
-        List<GroupData> groups = new ArrayList<GroupData>();
+
+    public Groups all() {
+        Groups groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement el : elements) {
             String name = el.getText();
@@ -88,4 +104,6 @@ public class GroupHelper extends HelperBase {
         }
         return groups;
     }
+
+
 }

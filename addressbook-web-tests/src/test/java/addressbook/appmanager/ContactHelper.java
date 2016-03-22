@@ -1,6 +1,8 @@
 package addressbook.appmanager;
 
 import addressbook.model.ContactData;
+import addressbook.model.Contacts;
+import addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -8,8 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Admin on 29.02.2016.
@@ -54,15 +57,19 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.xpath("//input[@name='selected[]']")).get(index).click();
     }
 
+    public void selectById(int id) {
+        wd.findElement(By.xpath("//input[@name='selected[]'][@id='" + id + "']")).click();
+
+    }
+
     public void submitContactDeleting() {
         click(By.xpath("//input[@onclick='DeleteSel()']"));
         wd.switchTo().alert().accept();
 
     }
 
-    public void edit(int index) {
-        wd.findElements(By.xpath("//a[contains(@href, 'edit.php?id=')]")).get(index).click();
-        //click(By.xpath("//a[contains(@href, 'edit.php?id=')]"));
+    public void edit(int id) {
+        wd.findElement(By.xpath("//a[@href=\"edit.php?id=" + id + "\"]")).click();
     }
 
     public void submitContactModification() {
@@ -79,19 +86,25 @@ public class ContactHelper extends HelperBase {
         submitContactCreation();
 
     }
+
     public void delete(int index) {
-       select(index);
-       submitContactDeleting();
+        select(index);
+        submitContactDeleting();
     }
 
-    public void modify(ContactData contact, int index) {
-       edit(index);
-       fillContactForm(contact, false);
-       submitContactModification();
+    public void delete(ContactData contact) {
+        selectById(contact.getId());
+        submitContactDeleting();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public void modify(ContactData contact) {
+        edit(contact.getId());
+        fillContactForm(contact, false);
+        submitContactModification();
+    }
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
         for (WebElement el : elements) {
             String secondName = el.findElement(By.cssSelector("td:nth-of-type(2)")).getText();
