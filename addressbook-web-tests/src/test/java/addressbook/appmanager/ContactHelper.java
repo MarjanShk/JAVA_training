@@ -2,7 +2,6 @@ package addressbook.appmanager;
 
 import addressbook.model.ContactData;
 import addressbook.model.Contacts;
-import addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Admin on 29.02.2016.
@@ -84,7 +81,7 @@ public class ContactHelper extends HelperBase {
         initContactCreation();
         fillContactForm(contactData, creation);
         submitContactCreation();
-
+        contactsCash = null;
     }
 
     public void delete(int index) {
@@ -95,23 +92,30 @@ public class ContactHelper extends HelperBase {
     public void delete(ContactData contact) {
         selectById(contact.getId());
         submitContactDeleting();
+        contactsCash = null;
     }
 
     public void modify(ContactData contact) {
         edit(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
+        contactsCash = null;
     }
 
+    private Contacts contactsCash = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactsCash != null) {
+            return new Contacts(contactsCash);
+        }
+        contactsCash = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));
         for (WebElement el : elements) {
             String secondName = el.findElement(By.cssSelector("td:nth-of-type(2)")).getText();
             String name = el.findElement(By.cssSelector(" td:nth-of-type(3)")).getText();
             int id = Integer.parseInt(el.findElement(By.cssSelector(" td.center>input")).getAttribute("id"));
-            contacts.add(new ContactData().withId(id).withName(name).withSecondname(secondName));
+            contactsCash.add(new ContactData().withId(id).withName(name).withSecondname(secondName));
         }
-        return contacts;
+        return new Contacts(contactsCash);
     }
 }
