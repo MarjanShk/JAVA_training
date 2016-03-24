@@ -28,8 +28,14 @@ public class ContactHelper extends HelperBase {
         type(By.name("firstname"), contactData.getName());
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getSecondname());
-        type(By.name("home"), contactData.getHomePhoneNumber());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
         type(By.name("email"), contactData.getEmail());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("address2"), contactData.getAddress2());
 
         if (creation) {
             try {
@@ -113,13 +119,50 @@ public class ContactHelper extends HelperBase {
         for (WebElement el : elements) {
             String secondName = el.findElement(By.cssSelector("td:nth-of-type(2)")).getText();
             String name = el.findElement(By.cssSelector(" td:nth-of-type(3)")).getText();
+            String allPhones = el.findElement(By.cssSelector(" td:nth-of-type(6)")).getText();
+            String allEmails = el.findElement(By.cssSelector(" td:nth-of-type(5)")).getText();
+            String address = el.findElement(By.cssSelector(" td:nth-of-type(4)")).getText();
             int id = Integer.parseInt(el.findElement(By.cssSelector(" td.center>input")).getAttribute("id"));
-            contactsCash.add(new ContactData().withId(id).withName(name).withSecondname(secondName));
+            contactsCash.add(new ContactData().withId(id).withName(name).
+                    withSecondname(secondName).withAllPhones(allPhones).withAllEmails(allEmails).withAddress(address));
         }
         return new Contacts(contactsCash);
     }
 
     public int count() {
         return wd.findElements(By.xpath("//input[@name='selected[]']")).size();
+    }
+
+    public String getAllPhonesFromEditForm() {
+        return wd.findElement(By.name("home")).getAttribute("value") +
+                wd.findElement(By.name("mobile")).getAttribute("value") +
+                wd.findElement(By.name("work")).getAttribute("value");
+    }
+
+    public String getAllEmailseFromEditForm() {
+        return wd.findElement(By.name("email")).getAttribute("value") +
+                wd.findElement(By.name("email2")).getAttribute("value") +
+                wd.findElement(By.name("email3")).getAttribute("value");
+    }
+
+    public String getAddressFromEditForm() {
+        return wd.findElement(By.name("address")).getText();
+    }
+
+    public void details(int id) {
+        wd.findElement(By.xpath("//a[@href='view.php?id=" + id + "']")).click();
+    }
+
+    public String dataFromDetailsPage() {
+        return wd.findElement(By.id("content")).getText();
+    }
+
+    public String dataFromEditForm() {
+        return wd.findElement(By.name("firstname")).getAttribute("value") +
+                wd.findElement(By.name("middlename")).getAttribute("value") +
+                wd.findElement(By.name("lastname")).getAttribute("value") +
+                wd.findElement(By.name("address")).getAttribute("value") +
+                getAllPhonesFromEditForm() +
+                getAllEmailseFromEditForm();
     }
 }

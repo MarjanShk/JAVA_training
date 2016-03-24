@@ -18,7 +18,7 @@ public class ModificationContactTests extends TestBase {
         if (app.contact().all().size() == 0) {
             app.contact().create(new ContactData().
                     withName("name1").withMiddlename("middlename1").withSecondname("secondname1").
-                    withHomePhoneNumber("0933456789").withEmail("example1@gmail.com").withGroup("name88"), true);
+                    withHomePhone("0933456789").withEmail("example1@gmail.com").withGroup("name88"), true);
         }
     }
 
@@ -30,7 +30,7 @@ public class ModificationContactTests extends TestBase {
         ContactData contact = new ContactData()
                 .withId(modifyContact.getId()).withName("mod_name1")
                 .withMiddlename("mod_middlename1").withSecondname("mod_secondname1")
-                .withHomePhoneNumber("0930000000").withEmail("mod_example1@gmail.com");
+                .withHomePhone("0930000000").withEmail("mod_example1@gmail.com");
         app.contact().modify(contact);
         app.goTo().homePage();
         assertThat(before.size(), equalTo(app.contact().count()));
