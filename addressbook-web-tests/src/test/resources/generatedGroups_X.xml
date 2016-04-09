@@ -1,0 +1,37 @@
+<list>
+  <Group>
+    <name>test_0</name>
+    <header>header_0</header>
+    <footer>footer_0</footer>
+  </Group>
+  <Group>
+    <name>test_1</name>
+    <header>header_1</header>
+    <footer>footer_1</footer>
+  </Group>
+  <Group>
+    <name>test_2</name>
+    <header>header_2</header>
+    <footer>footer_2</footer>
+  </Group>
+  <Group>
+    <name>test_3</name>
+    <header>header_3</header>
+    <footer>footer_3</footer>
+  </Group>
+  <Group>
+    <name>test_4</name>
+    <header>header_4</header>
+    <footer>footer_4</footer>
+  </Group>
+  <Group>
+    <name>test_5</name>
+    <header>header_5</header>
+    <footer>footer_5</footer>
+  </Group>
+  <Group>
+    <name>test_6</name>
+    <header>header_6</header>
+    <footer>footer_6</footer>
+  </Group>
+</list>

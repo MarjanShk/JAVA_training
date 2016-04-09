@@ -1,25 +1,37 @@
 package addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
+import java.io.File;
+
 public class ContactData {
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String name;
+    @Expose
     private String middlename;
+    @Expose
     private String secondname;
 
     private String nickName;
     private String title;
     private String company;
+    @Expose
     private String address;
 
-
+    @Expose
     private String homePhone;
+    @Expose
     private String mobilePhone;
+    @Expose
     private String workPhone;
     private String fax;
     private String allPhones;
-
+    @Expose
     private String email;
+    @Expose
     private String email2;
+    @Expose
     private String email3;
     private String allEmails;
 
@@ -31,11 +43,15 @@ public class ContactData {
 
     private String phone2;
     private String notes;
-
+    @Expose
     private String group;
+    @Expose
+    private String photo;
 
 
-
+    public String getPhoto() {
+        return photo;
+    }
 
     public String getName() {
         return name;
@@ -169,6 +185,11 @@ public class ContactData {
 
     public ContactData withAllEmails(String allEmails) {
         this.allEmails = allEmails;
+        return this;
+    }
+
+    public ContactData withPhoto(String photo) {
+        this.photo = photo;
         return this;
     }
 

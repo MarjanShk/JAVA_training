@@ -1,27 +1,27 @@
 package addressbook.model;
 
-import com.google.common.collect.ForwardingSet;
+import com.google.common.collect.ForwardingList;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 22.03.2016.
  */
-public class Contacts extends ForwardingSet<ContactData> {
+public class Contacts extends ForwardingList<ContactData> {
 
-    private Set<ContactData> delegate;
+    private List<ContactData> delegate;
 
     public Contacts(Contacts contacts) {
-        this.delegate = new HashSet<ContactData>(contacts.delegate);
+        this.delegate = new ArrayList<ContactData>(contacts.delegate);
     }
 
     public Contacts() {
-        this.delegate = new HashSet<>();
+        this.delegate = new ArrayList<>();
     }
 
     @Override
-    protected Set<ContactData> delegate() {
+    protected List<ContactData> delegate() {
         return delegate;
     }
 

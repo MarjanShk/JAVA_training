@@ -1,0 +1,30 @@
+[
+  {
+    "name": "name_1",
+    "middlename": "middle_1",
+    "secondname": "second_1",
+    "address": "City street №1",
+    "homePhone": "0933456781",
+    "mobilePhone": "0931122331",
+    "workPhone": "0954455661",
+    "email": "example11@gmail.com",
+    "email2": "example21@gmail.com",
+    "email3": "example31@gmail.com",
+    "group": "testGroup",
+    "photo": "src/test/resources/photo.png"
+  },
+  {
+    "name": "name_2",
+    "middlename": "middle_2",
+    "secondname": "second_2",
+    "address": "City street №2",
+    "homePhone": "0933456782",
+    "mobilePhone": "0931122332",
+    "workPhone": "0954455662",
+    "email": "example12@gmail.com",
+    "email2": "example22@gmail.com",
+    "email3": "example32@gmail.com",
+    "group": "testGroup",
+    "photo": "src/test/resources/photo.png"
+  }
+]

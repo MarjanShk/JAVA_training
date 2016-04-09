@@ -17,6 +17,7 @@ public class PhoneNumbersEmailAddressesTest extends TestBase {
     @Test
     public void testPhoneNumbersEmailAddresses() {
         ContactData contact = app.contact().all().iterator().next();
+        app.goTo().mainPage();
         app.contact().edit(contact.getId());
         String allPhonesFromEditForm = clean(app.contact().getAllPhonesFromEditForm());
         String allEmailsFromEditForm = clean(app.contact().getAllEmailseFromEditForm());

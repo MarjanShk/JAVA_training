@@ -8,4 +8,32 @@ dependencies{
     compile 'org.seleniumhq.selenium:selenium-java:2.53.0'
     compile 'org.testng:testng:6.9.10'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
+    compile 'com.beust:jcommander:1.48'
+    compile 'com.thoughtworks.xstream:xstream:1.4.9'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'ch.qos.logback:logback-classic:1.1.7'
+}
+
+task testGroups(type: Test){
+    useTestNG{
+        suites 'src/test/resources/testNG_groups.xml'
+    }
+    if(project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"
+    }
+    if(project.hasProperty('target')){
+        systemProperty 'target', "${target}"
+    }
+}
+
+task testContacts(type: Test){
+    useTestNG{
+        suites 'src/test/resources/testNG_contacts.xml'
+    }
+    if(project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"
+    }
+    if(project.hasProperty('target')){
+        systemProperty 'target', "${target}"
+    }
 }

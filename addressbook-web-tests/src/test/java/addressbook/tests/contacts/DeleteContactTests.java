@@ -24,13 +24,15 @@ public class DeleteContactTests extends TestBase {
 
     @Test() //enabled = false
     public void testDeleteContact() {
-        app.goTo().homePage();
+        app.goTo().mainPage();
         Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().delete(deletedContact);
         app.goTo().mainPage();
         assertThat(app.contact().count(), equalTo(before.size() - 1));
         Contacts after = app.contact().all();
+        before.sort((c1,c2)->c1.getId()-c2.getId());
+        after.sort((c1,c2)->c1.getId()-c2.getId());
         assertThat(after, equalTo(before.without(deletedContact)));
     }
 
