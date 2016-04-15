@@ -1,51 +1,67 @@
 package addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
-import java.io.File;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
     @Expose
+    @Column(name = "firstname")
     private String name;
     @Expose
+    @Column(name = "middlename")
     private String middlename;
     @Expose
+    @Column(name = "lastname")
     private String secondname;
 
-    private String nickName;
-    private String title;
-    private String company;
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
 
     @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
     @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
-    private String fax;
+    @Transient//hibernate skip column
     private String allPhones;
     @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
     @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
     @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
+    @Transient
     private String allEmails;
-
-    private String homePage;
-
-    private String birthDay;
-    private String aniversary;
+    @Transient
     private String address2;
-
-    private String phone2;
-    private String notes;
+    @Transient
     @Expose
     private String group;
     @Expose
+    @Type(type = "text")
+    @Column(name = "photo")
     private String photo;
 
 

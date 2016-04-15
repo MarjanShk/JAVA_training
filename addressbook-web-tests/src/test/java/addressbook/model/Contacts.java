@@ -3,6 +3,7 @@ package addressbook.model;
 import com.google.common.collect.ForwardingList;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,6 +19,10 @@ public class Contacts extends ForwardingList<ContactData> {
 
     public Contacts() {
         this.delegate = new ArrayList<>();
+    }
+
+    public Contacts(Collection<ContactData> contacts) {
+        this.delegate = new ArrayList<>(contacts);
     }
 
     @Override

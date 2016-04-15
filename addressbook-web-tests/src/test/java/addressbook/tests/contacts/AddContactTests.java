@@ -39,12 +39,11 @@ public class AddContactTests extends TestBase {
 
     @Test(dataProvider = "contactsFromJSON")
     public void testAddContact(ContactData contact) {
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         //File photo = new File("src/test/resources/photo.png");
         app.contact().create(contact, true);
         app.goTo().mainPage();
-        assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         before.sort((c1, c2) -> c1.getId() - c2.getId());
         after.sort((c1, c2) -> c1.getId() - c2.getId());
         assertThat(after, equalTo(before.withAdded(contact)));
