@@ -33,6 +33,7 @@ public class DeleteContactTests extends TestBase {
         before.sort((c1,c2)->c1.getId()-c2.getId());
         after.sort((c1,c2)->c1.getId()-c2.getId());
         assertThat(after, equalTo(before.without(deletedContact)));
+        verifyContactListInUI();
     }
 
 }
