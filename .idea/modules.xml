@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_main.iml" group="addressbook-web-tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/addressbook-web-tests_test.iml" group="addressbook-web-tests" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis_main.iml" group="mantis" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis_test.iml" group="mantis" />
       <module fileurl="file://$PROJECT_DIR$/sandbox/sandbox.iml" filepath="$PROJECT_DIR$/sandbox/sandbox.iml" />
     </modules>
   </component>
