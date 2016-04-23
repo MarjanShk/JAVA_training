@@ -19,7 +19,10 @@ public class ApplicationManager {
     private WebDriver wd;
     private String browser;
     private RegistrationHelper registrationHelper;
+    private SessionHelper sessionHelper;
+    private ManageUsersHelper manageUsersHelper;
     private FtpHelper ftp;
+    private MailHelper mailHelper;
 
 
     public ApplicationManager(String browser) {
@@ -30,6 +33,8 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+        sessionHelper = new SessionHelper(this);
+        manageUsersHelper = new ManageUsersHelper(this);
         //wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
@@ -60,6 +65,12 @@ public class ApplicationManager {
         }
         return ftp;
     }
+    public MailHelper mail(){
+        if(mailHelper == null){
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
+    }
 
     public WebDriver getDriver() {
         if (wd == null) {
@@ -74,5 +85,13 @@ public class ApplicationManager {
             wd.get(properties.getProperty("baseUrl"));
         }
         return wd;
+    }
+
+    public SessionHelper getSessionHelper() {
+        return sessionHelper;
+    }
+
+    public ManageUsersHelper manageUsers() {
+        return manageUsersHelper;
     }
 }
