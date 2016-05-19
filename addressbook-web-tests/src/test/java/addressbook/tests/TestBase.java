@@ -34,7 +34,7 @@ public class TestBase {
         app.init();
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterSuite(alwaysRun = true) //TODO: check
     public void tearDown() {
         app.stop();
     }

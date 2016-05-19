@@ -17,6 +17,7 @@ public class ManageUsersHelper extends HelperBase {
     }
 
     public void changePassword() throws IOException {
+        click(By.xpath("//a[contains(@href, 'manage_overview_page.php')]"));
         click(By.xpath("//a[contains(@href, 'manage_user_page.php')]"));
         wd.findElement(By.xpath("//a[contains(text(), 'user' )]"));
         WebElement user = wd.findElement(By.xpath("//a[contains(text(), 'user' )]"));

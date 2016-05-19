@@ -23,6 +23,7 @@ public class ApplicationManager {
     private ManageUsersHelper manageUsersHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private SoapHelper soapHelper;
 
 
     public ApplicationManager(String browser) {
@@ -33,8 +34,6 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-        sessionHelper = new SessionHelper(this);
-        manageUsersHelper = new ManageUsersHelper(this);
         //wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
@@ -65,11 +64,31 @@ public class ApplicationManager {
         }
         return ftp;
     }
-    public MailHelper mail(){
-        if(mailHelper == null){
+
+    public MailHelper mail() {
+        if (mailHelper == null) {
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
+    }
+
+    public SoapHelper soap() {
+        if (soapHelper == null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
+    }
+    public SessionHelper getSessionHelper() {
+        if (sessionHelper == null) {
+            sessionHelper = new SessionHelper(this);
+        }
+        return sessionHelper;
+    }
+    public ManageUsersHelper manageUsers() {
+        if(manageUsersHelper== null){
+            manageUsersHelper = new ManageUsersHelper(this);
+        }
+        return manageUsersHelper;
     }
 
     public WebDriver getDriver() {
@@ -87,11 +106,4 @@ public class ApplicationManager {
         return wd;
     }
 
-    public SessionHelper getSessionHelper() {
-        return sessionHelper;
-    }
-
-    public ManageUsersHelper manageUsers() {
-        return manageUsersHelper;
-    }
 }
