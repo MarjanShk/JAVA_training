@@ -27,7 +27,7 @@ import static org.hamcrest.MatcherAssert.*;
  */
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
-    protected static ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));///BrowserType.FIREFOX
+    protected static ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));///BrowserType.FIREFOX
 
     @BeforeSuite
     public void setUp() throws Exception {

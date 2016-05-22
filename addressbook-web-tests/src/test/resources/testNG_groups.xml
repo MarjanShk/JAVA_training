@@ -4,8 +4,9 @@
     <test name="Groups">
         <classes>
             <class name="addressbook.tests.groups.AddGroupTests"/>
-            <class name="addressbook.tests.groups.ModificationGroupTest"/>
-            <class name="addressbook.tests.groups.DeleteGroups"/>
+            <!--   <class name="addressbook.tests.groups.ModificationGroupTest"/>
+               <class name="addressbook.tests.groups.DeleteGroups"/>
+               -->
         </classes>
     </test>
 </suite>
